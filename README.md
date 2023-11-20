@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Spotify App [Title Undecided]
 
 Team name: Nami's Minions
