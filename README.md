@@ -1,10 +1,11 @@
+<<<<<<< HEAD
 # Spotify App [Title Undecided]
 
 Team name: Nami's Minions
 
 Team members: Nami, Jonah, Ian, Kyle
 
-This repository contains code for our CIS 5500 Final Project. We are building a web application that allows people to find songs similar to ones that they know and love. While Spotify's radio function is helpful, it often creates an echo chamber where similar songs all have the same recommendations (e.g. song A recommends song B, and song B recommends song A). We are looking to integrate LLMs to allow for intelligent querying of songs in existing databases.
+This repository contains code for our CIS 5500 Final Project. We are planning to build a web application that delivers song recommendations and generates playlists for moods using LLMs. This will be based on a backend that stores hundreds of thousands of songs, as well as their features like valence, danceability, etc. We plan to deliver song recommendations using content-based or collaborative filtering. We also are looking to use LLMs to provide more context-aware recommendations. For example, if a user says they want "slow Jazz music," then we might want to use LLMs to extract keywords and create structured queries.
 
 ## File Structure
 
