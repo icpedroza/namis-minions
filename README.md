@@ -30,7 +30,9 @@ This repository contains code for our CIS 5500 Final Project. We are planning to
     └── server.js
 ```
 
-`client`: Web application files [Jonah to add more] 
+`client`: Files for the client side of the web application. Uses react.js.
+<br>
+`server`: Files for the server side of the web application. Makes queries to MySQL database, and uses express to serve requests from the client.
 <br> 
 `data`: This directory is not displayed on github, but includes initial CSV files and the final cleaned dataset that makes up the main table in our database instance
 <br>

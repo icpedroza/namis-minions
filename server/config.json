@@ -1,4 +1,9 @@
 {
+  "rds_host": "namis-minions.c1kbcnbbm4bk.us-east-2.rds.amazonaws.com",
+  "rds_port": 3306,
+  "rds_user": "nami",
+  "rds_db": "",
+  "rds_password": "*jazzmusicstops*",
   "server_host": "localhost",
   "server_port": "8080"
 }
