@@ -11,7 +11,7 @@ This repository contains code for our CIS 5500 Final Project. We are planning to
 ```bash
 ├── README.md
 ├── client
-│   ├── app.js
+│   ├── App.js
 │   ├── index.js
 │   ├── package-lock.json
 │   ├── package.json

@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const config = require('./config.json');
 
 const test = async function(req, res) {
-    res.send(`this is from the server!`);
+    res.json({content: 'this is from the server!'});
 };
 
 const connection = mysql.createConnection({
@@ -105,7 +105,7 @@ const music_trends = async function(req, res) {
         year,
         AVG(danceability) AS avg_danceability,
         AVG(energy) AS avg_energy,
-        AVG(`key`) AS avg_key,
+        AVG(key) AS avg_key,
         AVG(loudness) AS avg_loudness,
         AVG(mode) AS avg_mode,
         AVG(speechiness) AS avg_speechiness,
