@@ -5,6 +5,5 @@
   "rds_db": "Spotify",
   "rds_password": "*jazzmusicstops*",
   "server_host": "localhost",
-  "server_port": "8080",
-  "openai_key": "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"
+  "server_port": "8080"
 }
