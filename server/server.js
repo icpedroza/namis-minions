@@ -12,6 +12,8 @@ app.get('/test', routes.test);
 app.get('/artist_albums', routes.artist_albums);
 app.get('/top_artists', routes.top_artists);
 
+app.get('/openai/completion', routes.openaiCompletion);
+
 app.listen(config.server_port, () => {
     console.log(`Server running at http://${config.server_host}:${config.server_port}/`)
 });
