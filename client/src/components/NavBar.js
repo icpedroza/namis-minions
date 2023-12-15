@@ -33,8 +33,8 @@ export default function NavBar() {
                 <Toolbar>
                     <NavText href='/' text='Beat Buddy' isMain/>
                     <NavText href='/test' text='Test'/>
+                    <NavText href='/beat_buddy' text='Beat Buddy'/>
                     <NavText href='/stats' text='Statistics'/>
-                    <Button>Login</Button>
                 </Toolbar>
             </AppBar>
         </Container>
