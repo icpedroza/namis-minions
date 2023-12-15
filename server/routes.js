@@ -35,14 +35,21 @@ const send_res_array = function(res, err, data) {
 }
 
 const artist_albums = async function(req, res) {
-    connection.query(`
-    SELECT artists,
-        COUNT(DISTINCT album) AS total_albums,
-        COUNT(name) AS total_songs
-    FROM songs_temp
-    GROUP BY artists;
-    `, (err, data) => send_res_array(res, err, data)
-    );
+    let q = `
+        SELECT * FROM artist_albums_songs
+    `;
+
+    const sorted = req.query.sorted;
+    if (sorted) {
+        q = q + `\nORDER BY total_albums DESC`;
+    }
+
+    const pageSize = req.query.page_size;
+    if (pageSize) {
+        q = q + `\nLIMIT ${pageSize}`;
+    }
+
+    connection.query(q, (err, data) => send_res_array(res, err, data));
 }
 
 const similar_songs = async function(req, res) {
@@ -79,22 +86,14 @@ const similar_songs = async function(req, res) {
 
 const happy_mood_playlist = async function(req, res) {
     connection.query(`
-    SELECT name, album, artists
-    FROM songs_temp
-    WHERE
-        energy >= 0.8
-        AND mode >= 0.3
-        AND liveness >= 0.8
-        AND valence >= 0.8
-        AND tempo >= 140;
+    SELECT * FROM high_energy_songs;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
 const hype_playlist = async function(req, res) {
     connection.query(`
-    SELECT name, album, artists, loudness
-    FROM songs_temp
+    SELECT * FROM loud_songs
     ORDER BY loudness DESC
     LIMIT 30;
     `, (err, data) => send_res_array(res, err, data)
@@ -103,55 +102,59 @@ const hype_playlist = async function(req, res) {
 
 const music_trends = async function(req, res) {
     connection.query(`
-    SELECT 
-        year,
-        AVG(danceability) AS avg_danceability,
-        AVG(energy) AS avg_energy,
-        AVG(key) AS avg_key,
-        AVG(loudness) AS avg_loudness,
-        AVG(mode) AS avg_mode,
-        AVG(speechiness) AS avg_speechiness,
-        AVG(acousticness) AS avg_acousticness,
-        AVG(instrumentalness) AS avg_instrumentalness,
-        AVG(liveness) AS avg_liveness,
-        AVG(valence) AS avg_valence,
-        AVG(tempo) AS avg_tempo,
-        AVG(duration_ms) AS avg_duration_ms,
-        AVG(explicit_True) AS avg_explicit_True
-    FROM songs_temp
-    GROUP BY year;
+    SELECT * FROM yearly_trends;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
 const top_artists = async function(req, res) {
-    connection.query(`
-    SELECT artists, COUNT(*) AS total_songs
-    FROM songs_temp
-    GROUP BY artists
-    ORDER BY COUNT(*) DESC
-    LIMIT 10;
-    `, (err, data) => send_res_array(res, err, data)
-    );
+    let q = `
+    SELECT * FROM top_artists_by_song_no
+    ORDER BY total_songs DESC
+    `;
+
+    const pageSize = req.query.page_size;
+    if (pageSize) {
+        q += `\nLIMIT ${pageSize}`;
+    }
+
+    connection.query(q, (err, data) => send_res_array(res, err, data));
 }
 
 const longest_albums = async function(req, res) {
     connection.query(`
-    SELECT album, SUM(duration_ms) AS total_duration
-    FROM songs_temp
-    GROUP BY album
-    ORDER BY total_duration DESC
-    LIMIT 10;
+    SELECT album_name, total_duration / (60 * 1000) AS total_duration_minutes
+    FROM top_albums_duration
+    ORDER BY total_duration DESC;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
 const songs_by_length = async function(req, res) {
     connection.query(`
-    SELECT ROUND(duration_ms / 60000) AS duration_minutes, COUNT(*) AS num_songs
-    FROM songs_temp
-    GROUP BY ROUND(duration_ms / 60000)
-    ORDER BY duration_minutes;
+    SELECT * FROM songs_duration;
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const songs_per_year = async function(req, res) {
+    connection.query(`
+    SELECT * FROM songs_per_year
+    WHERE year <> 0;
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const explicit_songs_per_year = async function(req, res) {
+    connection.query(`
+    SELECT * FROM explicit_songs_per_year;
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const clean_artists = async function(req, res) {
+    connection.query(`
+    SELECT * FROM artists_no_explicit_songs
     `, (err, data) => send_res_array(res, err, data)
     );
 }
@@ -204,4 +207,7 @@ module.exports = {
     songs_by_length,
     openaiCompletion,
     custom_query
+    songs_per_year,
+    explicit_songs_per_year,
+    clean_artists
 }
