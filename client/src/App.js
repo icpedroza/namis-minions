@@ -4,6 +4,7 @@ import { createTheme } from "@mui/material/styles";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
+import LLMPage from "./pages/LLMPage";
 
 const theme = createTheme({
     palette: {
@@ -20,6 +21,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/test" element={<TestPage/>}/>
+                    <Route path="/beat_buddy" element={<LLMPage/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
