@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const config = require('./config.json');
+const { spawn } = require('child_process');
+const path = require('path'); // Import the 'path' module
 
 const test = async function(req, res) {
     res.json({content: 'this is from the server!'});
@@ -157,6 +159,24 @@ const clean_artists = async function(req, res) {
     );
 }
 
+// Function to handle OpenAI API request
+const openaiCompletion = (req, res) => {
+    const prompt = "I'm going swingdancing. Generate me a playlist"; // Define your prompt here or extract it from the request
+
+    // Adjust the path to the worker folder and openai_worker.py
+    const pythonProcess = spawn('python', [path.join(__dirname, '..', 'worker', 'openai_worker.py'), prompt]);
+
+    pythonProcess.stdout.on('data', (data) => {
+        const result = data.toString();
+        res.send(result); // Send the result back to the client
+    });
+
+    pythonProcess.on('error', (error) => {
+        console.error('Python script error:', error);
+        res.status(500).send('Error executing Python script');
+    });
+};
+
 module.exports = {
     test,
     artist_albums,
@@ -169,5 +189,6 @@ module.exports = {
     songs_by_length,
     songs_per_year,
     explicit_songs_per_year,
-    clean_artists
+    clean_artists,
+    openaiCompletion
 }

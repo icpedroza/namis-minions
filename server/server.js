@@ -21,6 +21,8 @@ app.get('/songs_per_year', routes.songs_per_year);
 app.get('/explicit_songs_per_year', routes.explicit_songs_per_year);
 app.get('/clean_artists', routes.clean_artists);
 
+app.get('/openai/completion', routes.openaiCompletion);
+
 app.listen(config.server_port, () => {
     console.log(`Server running at http://${config.server_host}:${config.server_port}/`)
 });
