@@ -2,6 +2,7 @@ import {Container, Divider, FormControl, InputLabel, MenuItem, Select, SelectCha
 import {useState} from "react";
 import LazyTable from "../components/LazyTable";
 import config from "../config.json";
+import SimpleTable from "../components/SimpleTable";
 
 export default function HomePage() {
     const [query, setQuery] = useState([]);
@@ -26,25 +27,11 @@ export default function HomePage() {
 
     return (
         <Container>
-            <h1>Welcome to our website! :)</h1>
+            <p>
+            Beat Buddy is a cutting edge web based application that uses machine learning technology to deliver personalized song recommendations.
+            </p>
             <Divider/>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="query-select-label">Query</InputLabel>
-                <Select
-                    labelId="query-select-label"
-                    id="query-select"
-                    value={query}
-                    onChange={handleChange}
-                    label="Query"
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"top_artists"}>Top Artists</MenuItem>
-                </Select>
-            </FormControl>
-            <Divider/>
-            <LazyTable route={`http://${config.server_host}:${config.server_port}/${query}`} columns={top_artists_cols}/>
+            <SimpleTable route={`http://${config.server_host}:${config.server_port}/artist_albums`} columns={top_artists_cols} title='Most Prolific Artists' pageSize={10}/>
         </Container>
     )
 }

@@ -1,4 +1,4 @@
-import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import {AppBar, Button, Container, Toolbar, Typography} from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 function NavText({ href, text, isMain }) {
@@ -28,13 +28,15 @@ function NavText({ href, text, isMain }) {
 
 export default function NavBar() {
     return (
-        <AppBar position='static'>
-            <Container maxWidth='x1'>
-                <Toolbar disableGutters>
-                    <NavText href='/' text='Home' isMain/>
+        <Container maxWidth='xl'>
+            <AppBar position='static' style={{ borderRadius: 15 }}>
+                <Toolbar>
+                    <NavText href='/' text='Beat Buddy' isMain/>
                     <NavText href='/test' text='Test'/>
+                    <NavText href='/stats' text='Statistics'/>
+                    <Button>Login</Button>
                 </Toolbar>
-            </Container>
-        </AppBar>
+            </AppBar>
+        </Container>
     )
 }
