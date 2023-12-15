@@ -206,7 +206,7 @@ module.exports = {
     longest_albums,
     songs_by_length,
     openaiCompletion,
-    custom_query
+    custom_query,
     songs_per_year,
     explicit_songs_per_year,
     clean_artists
