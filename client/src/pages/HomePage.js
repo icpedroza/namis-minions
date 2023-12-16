@@ -31,7 +31,7 @@ export default function HomePage() {
             Beat Buddy is a cutting edge web based application that uses machine learning technology to deliver personalized song recommendations.
             </p>
             <Divider/>
-            <SimpleTable route={`http://${config.server_host}:${config.server_port}/artist_albums`} columns={top_artists_cols} title='Most Prolific Artists' pageSize={10}/>
+            <SimpleTable route={`https://${config.server_host}:${config.server_port}/artist_albums`} columns={top_artists_cols} title='Most Prolific Artists' pageSize={10}/>
         </Container>
     )
 }
