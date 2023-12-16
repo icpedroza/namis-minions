@@ -2,8 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const config = require('./config.json');
 const routes = require('./routes');
+const https = require('https');
 
 const app = express();
+
+https
+    .createServer(app)
+    .listen(8080, ()=>{
+    console.log('server is runing at port 8080')
+  });
+
 app.use(cors({
     origin: '*',
 }));
@@ -26,8 +34,3 @@ app.get('/search_songs', routes.search_songs);
 
 app.post('/openai/completion', routes.openaiCompletion);
 app.post('/custom_query', routes.custom_query);
-
-app.listen(config.server_port, () => {
-    console.log(`Server running at http://${config.server_host}:${config.server_port}/`)
-    console.log(`ASDFASDFSADASDFG`)
-});
