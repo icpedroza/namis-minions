@@ -1,4 +1,4 @@
 {
-  "server_host": "beatbuddyfinal-production.up.railway.app",
+  "server_host": "0.0.0.0",
   "server_port": "8080"
 }
