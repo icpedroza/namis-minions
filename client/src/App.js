@@ -5,10 +5,17 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
 import StatsPage from "./pages/StatsPage";
+import SearchPage from "./pages/SearchPage";
+import {lime, purple} from "@mui/material/colors";
 
 const theme = createTheme({
     palette: {
-        mode: 'light',
+        primary: {
+            main: '#6617da'
+        },
+        secondary: {
+            main: '#dd6e42'
+        }
     },
 });
 
@@ -22,6 +29,7 @@ export default function App() {
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/test" element={<TestPage/>}/>
                     <Route path="/stats" element={<StatsPage/>}/>
+                    <Route path="/search" element={<SearchPage />}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

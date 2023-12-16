@@ -37,7 +37,7 @@ export default function StatsPage() {
         <Grid container spacing={2} align='center' style={{ paddingTop:'100px' }}>
             <Grid item xs={6}>
                 <Typography variant='h5' align='center'>most songs</Typography>
-                <BarChart width={600} height={300} data={topArtistData} margin={{bottom: 40}}>
+                <BarChart width={800} height={500} data={topArtistData} margin={{bottom: 40}}>
                     <XAxis dataKey="artist_name" type="category" interval={0} tick={<CustomizedYAxisTick />}/>
                     <YAxis/>
                     <Bar dataKey="total_songs"/>
@@ -46,7 +46,7 @@ export default function StatsPage() {
             </Grid>
             <Grid item xs={6}>
                 <Typography variant='h5' align='center'>most albums</Typography>
-                <BarChart width={600} height={300} data={mostAlbumsData} margin={{bottom: 40}}>
+                <BarChart width={800} height={500} data={mostAlbumsData} margin={{bottom: 40}}>
                     <XAxis dataKey="artist_name" type="category" interval={0} tick={<CustomizedYAxisTick />}/>
                     <YAxis/>
                     <Bar dataKey="total_albums"/>

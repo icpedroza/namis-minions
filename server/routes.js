@@ -159,6 +159,47 @@ const clean_artists = async function(req, res) {
     );
 }
 
+const search_songs = async function(req, res) {
+    const title = req.query.title ?? '';
+    const duration_low = req.query.duration_low ?? 60;
+    const duration_high = req.query.duration_high ?? 660;
+    const danceability_low = req.query.danceability_low ?? 0;
+    const danceability_high = req.query.danceability_high ?? 1;
+    const energy_low = req.query.energy_low ?? 0;
+    const energy_high = req.query.energy_high ?? 1;
+    const valence_low = req.query.valence_low ?? 0;
+    const valence_high = req.query.valence_high ?? 1;
+    const speechiness_low = req.query.speechiness_low ?? 0;
+    const speechiness_high = req.query.speechiness_high ?? 0;
+    const acousticness_low = req.query.acousticness_low ?? 0;
+    const acousticness_high = req.query.acousticness_high ?? 0;
+    const instrumentalness_low = req.query.instrumentalness_low ?? 0;
+    const instrumentalness_high = req.query.instrumentalness_high ?? 0;
+    const liveness_low = req.query.liveness_low ?? 0;
+    const liveness_high = req.query.liveness_high ?? 1;
+    const tempo_low = req.query.tempo_low ?? 0;
+    const tempo_high = req.query.tempo_high ?? 250;
+    const explicit = req.query.explicit === 'true' ? 1 : 0;
+
+    connection.query(`
+    SELECT *
+    FROM songs
+    JOIN artists ON songs.artist_id = artists.artist_id
+    WHERE name LIKE '%${title}%'
+    AND ${duration_low * 1000} <= duration_ms AND duration_ms <= ${duration_high * 1000}
+    AND ${danceability_low} <= danceability AND danceability <= ${danceability_high}
+    AND ${energy_low} <= energy AND energy <= ${energy_high}
+    AND ${valence_low} <= valence AND valence <= ${valence_high}
+    AND ${speechiness_low} <= speechiness AND speechiness <= ${speechiness_high}
+    AND ${acousticness_low} <= acousticness AND acousticness <= ${acousticness_high}
+    AND ${instrumentalness_low} <= instrumentalness AND instrumentalness <= ${instrumentalness_high}
+    AND ${liveness_low} <= liveness AND liveness <= ${liveness_high}
+    AND explicit_True <= ${explicit}
+    LIMIT 10
+  `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
 // Function to handle OpenAI API request
 const openaiCompletion = (req, res) => {
     const prompt = "I'm going swingdancing. Generate me a playlist"; // Define your prompt here or extract it from the request
@@ -190,5 +231,6 @@ module.exports = {
     songs_per_year,
     explicit_songs_per_year,
     clean_artists,
+    search_songs,
     openaiCompletion
 }

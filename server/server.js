@@ -20,6 +20,7 @@ app.get('/songs_by_length', routes.songs_by_length);
 app.get('/songs_per_year', routes.songs_per_year);
 app.get('/explicit_songs_per_year', routes.explicit_songs_per_year);
 app.get('/clean_artists', routes.clean_artists);
+app.get('/search_songs', routes.search_songs);
 
 app.get('/openai/completion', routes.openaiCompletion);
 
