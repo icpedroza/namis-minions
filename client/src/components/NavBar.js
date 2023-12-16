@@ -32,8 +32,6 @@ export default function NavBar() {
             <AppBar position='static' style={{ borderRadius: 15 }}>
                 <Toolbar>
                     <NavText href='/' text='Beat Buddy' isMain />
-                    <NavText href='/test' text='Test' />
-                    <NavText href='/beat_buddy' text='Beat Buddy' />
                     <NavText href='/stats' text='Stats & Info' />
                     <NavText href='/search' text='Search Page' />
                 </Toolbar>

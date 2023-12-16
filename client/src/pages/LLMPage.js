@@ -78,9 +78,13 @@ export default function LLMPage() {
         <ThemeProvider theme={theme}>
             <Container>
                 <h1>Welcome to Beat Buddy</h1>
-
-                <p>Input your preferences below for a custom generated playlist! Example query: "Can I have some happy songs?"</p>
-                <Divider />
+                <p>
+                    Beat Buddy is a cutting edge web based application that uses machine learning technology to deliver
+                    personalized song recommendations.
+                </p>
+                <p>Input your preferences below for a custom generated playlist! Example query: "Can I have some happy
+                    songs?"</p>
+                <Divider/>
                 <TextField
                     type="text"
                     value={prompt}
@@ -98,7 +102,7 @@ export default function LLMPage() {
                 >
                     Generate Playlist
                 </Button>
-                <Divider />
+                <Divider/>
                 {loading && (
                     <Box
                         display="flex"
@@ -106,7 +110,7 @@ export default function LLMPage() {
                         alignItems="center"
                         height={200} // Adjust height as needed
                     >
-                        <CircularProgress />
+                        <CircularProgress/>
                     </Box>
                 )}
                 {error && (
@@ -116,7 +120,8 @@ export default function LLMPage() {
                         alignItems="center"
                         height={200} // Adjust height as needed
                     >
-                        <Typography variant="h4" color="primary">Beat Buddy had an oopsy-daisy. Try again with a new prompt!</Typography>
+                        <Typography variant="h4" color="primary">Beat Buddy had an oopsy-daisy. Try again with a new
+                            prompt!</Typography>
                     </Box>
                 )}
                 {generatedPlaylist.length > 0 && (
