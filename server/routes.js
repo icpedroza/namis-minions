@@ -200,6 +200,27 @@ const search_songs = async function(req, res) {
     );
 }
 
+const album_summary_stats = async function(req, res) {
+    connection.query(`
+        SELECT * FROM album_avgs;
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const danceability_by_decade = async function(req, res) {
+    connection.query(`
+        SELECT * FROM decade_dance_albums;
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const high_variation_albums = async function(req, res) {
+    connection.query(`
+        SELECT * FROM VariableAlbums
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
 const custom_query = async function(req, res) {
     // Extract the prompt from the request body or query parameters
     console.log(req.body);
@@ -252,4 +273,7 @@ module.exports = {
     explicit_songs_per_year,
     clean_artists,
     search_songs,
+    album_summary_stats,
+    danceability_by_decade,
+    high_variation_albums,
 }

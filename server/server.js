@@ -23,6 +23,9 @@ app.get('/songs_per_year', routes.songs_per_year);
 app.get('/explicit_songs_per_year', routes.explicit_songs_per_year);
 app.get('/clean_artists', routes.clean_artists);
 app.get('/search_songs', routes.search_songs);
+app.get('/album_summary_stats', routes.album_summary_stats);
+app.get('/danceability_by_decade', routes.danceability_by_decade);
+app.get('/high_variation_albums', routes.high_variation_albums);
 
 app.post('/openai/completion', routes.openaiCompletion);
 app.post('/custom_query', routes.custom_query);
