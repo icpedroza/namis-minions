@@ -35,6 +35,7 @@ export default function NavBar() {
                     <NavText href='/test' text='Test'/>
                     <NavText href='/beat_buddy' text='Beat Buddy'/>
                     <NavText href='/stats' text='Statistics'/>
+                    <NavText href='/search' text='Search' />
                 </Toolbar>
             </AppBar>
         </Container>
