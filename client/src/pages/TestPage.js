@@ -6,7 +6,7 @@ export default function HomePage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`http://${config.server_host}:${config.server_port}/test`)
+        fetch(`https://${config.server_host}:${config.server_port}/test`)
             .then(r => r.json())
             .then(r => setData(r));
     }, []);
