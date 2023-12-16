@@ -3,10 +3,15 @@ const express = require('express');
 const cors = require('cors');
 const config = require('./config.json');
 const routes = require('./routes');
+const http = require('http');
 const https = require('https');
 
 const app = express();
-
+http
+    .createServer(app)
+    .listen(8080, ()=>{
+	console.log('The HTTP server is running at port 8080.')
+  });
 https
     .createServer(
         {
@@ -15,8 +20,8 @@ https
         },
 	app
     )
-    .listen(8080, ()=>{
-    console.log('The server is running at port 8080.')
+    .listen(8081, ()=>{
+    console.log('The HTTPS server is running at port 8081.')
   });
 
 app.use(cors({
