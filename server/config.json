@@ -4,6 +4,6 @@
   "rds_user": "nami",
   "rds_db": "Spotify",
   "rds_password": "*jazzmusicstops*",
-  "server_host": "localhost",
+  "server_host": "0.0.0.0",
   "server_port": "8080"
 }

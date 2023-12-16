@@ -1,9 +1,29 @@
+const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const config = require('./config.json');
 const routes = require('./routes');
+const http = require('http');
+const https = require('https');
 
 const app = express();
+http
+    .createServer(app)
+    .listen(8080, ()=>{
+	console.log('The HTTP server is running at port 8080.')
+  });
+https
+    .createServer(
+        {
+            key: fs.readFileSync("key.pem"),
+            cert: fs.readFileSync("cert.pem"),
+        },
+	app
+    )
+    .listen(8081, ()=>{
+    console.log('The HTTPS server is running at port 8081.')
+  });
+
 app.use(cors({
     origin: '*',
 }));
@@ -29,7 +49,3 @@ app.get('/high_variation_albums', routes.high_variation_albums);
 
 app.post('/openai/completion', routes.openaiCompletion);
 app.post('/custom_query', routes.custom_query);
-
-app.listen(config.server_port, () => {
-    console.log(`Server running at http://${config.server_host}:${config.server_port}/`)
-});
