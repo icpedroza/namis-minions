@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const config = require('./config.json');
@@ -7,9 +8,15 @@ const https = require('https');
 const app = express();
 
 https
-    .createServer(app)
+    .createServer(
+        {
+            key: fs.readFileSync("key.pem"),
+            cert: fs.readFileSync("cert.pem"),
+        },
+	app
+    )
     .listen(8080, ()=>{
-    console.log('server is runing at port 8080')
+    console.log('The server is running at port 8080.')
   });
 
 app.use(cors({
