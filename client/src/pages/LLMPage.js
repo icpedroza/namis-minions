@@ -1,7 +1,9 @@
-import {Container, Divider, CircularProgress, FormControl, InputLabel, 
-    MenuItem, Select, SelectChangeEvent, createTheme, ThemeProvider, 
-    TextField, Button, Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Typography} from "@mui/material";
-import {useState} from "react";
+import {
+    Container, Divider, CircularProgress, FormControl, InputLabel,
+    MenuItem, Select, SelectChangeEvent, createTheme, ThemeProvider,
+    TextField, Button, Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Typography
+} from "@mui/material";
+import { useState } from "react";
 import LazyTable from "../components/LazyTable";
 import config from "../config.json";
 import axios from 'axios'; // Import axios if you're using it
@@ -22,7 +24,7 @@ export default function LLMPage() {
                 main: '#dd6e42'
             }
         },
-      });
+    });
 
     const handleGeneratePlaylist = async () => {
         setLoading(true);
@@ -34,7 +36,7 @@ export default function LLMPage() {
             console.log(promptResponse);
             const generatedQuery = promptResponse.data;
             setQuery(generatedQuery);
-            
+
             try {
                 const queryResponse = await axios.post(`http://${config.server_host}:${config.server_port}/custom_query`, {
                     query: generatedQuery
@@ -75,71 +77,73 @@ export default function LLMPage() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <h1>Welcome to the Beat Buddy! Ask anything you like</h1>
-                <Divider/>
-                    <TextField
-                        type="text"
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="Enter your prompt..."
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleGeneratePlaylist}
-                        disabled={loading}
+                <h1>Welcome to Beat Buddy</h1>
+
+                <p>Input your preferences below for a custom generated playlist! Example query: "Can I have some happy songs?"</p>
+                <Divider />
+                <TextField
+                    type="text"
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder="Enter your prompt..."
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleGeneratePlaylist}
+                    disabled={loading}
+                >
+                    Generate Playlist
+                </Button>
+                <Divider />
+                {loading && (
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        height={200} // Adjust height as needed
                     >
-                        Generate Playlist
-                    </Button>
-                <Divider/>
-                    {loading && (
-                        <Box
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            height={200} // Adjust height as needed
-                        >
-                            <CircularProgress />
-                        </Box>
-                    )}
-                    {error && (
-                        <Box
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            height={200} // Adjust height as needed
-                        >
-                            <Typography variant="h4" color="primary">Beat Buddy had an oopsy-daisy. Try again with a new prompt!</Typography>
-                        </Box>
-                    )}
-                    {generatedPlaylist.length > 0 && ( 
-                        <Box marginTop={2}>
-                            <h3>Generated Playlist:</h3>
-                            <TableContainer>
+                        <CircularProgress />
+                    </Box>
+                )}
+                {error && (
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        height={200} // Adjust height as needed
+                    >
+                        <Typography variant="h4" color="primary">Beat Buddy had an oopsy-daisy. Try again with a new prompt!</Typography>
+                    </Box>
+                )}
+                {generatedPlaylist.length > 0 && (
+                    <Box marginTop={2}>
+                        <h3>Generated Playlist:</h3>
+                        <TableContainer>
                             <Table>
                                 <TableHead>
-                                <TableRow>
-                                    {generatedPlaylistColumns.map((column) => (
-                                    <TableCell key={column.field}>{column.headerName}</TableCell>
-                                    ))}
-                                </TableRow>
+                                    <TableRow>
+                                        {generatedPlaylistColumns.map((column) => (
+                                            <TableCell key={column.field}>{column.headerName}</TableCell>
+                                        ))}
+                                    </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                {generatedPlaylist.map((row, index) => (
-                                    <TableRow key={index}>
-                                    {generatedPlaylistColumns.map((column) => (
-                                        <TableCell key={column.field}>{row[column.field]}</TableCell>
+                                    {generatedPlaylist.map((row, index) => (
+                                        <TableRow key={index}>
+                                            {generatedPlaylistColumns.map((column) => (
+                                                <TableCell key={column.field}>{row[column.field]}</TableCell>
+                                            ))}
+                                        </TableRow>
                                     ))}
-                                    </TableRow>
-                                ))}
                                 </TableBody>
                             </Table>
-                            </TableContainer>
-                        </Box>
-                    )}
+                        </TableContainer>
+                    </Box>
+                )}
             </Container>
         </ThemeProvider>
     )
