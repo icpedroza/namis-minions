@@ -200,9 +200,27 @@ const search_songs = async function(req, res) {
     );
 }
 
+const custom_query = async function(req, res) {
+    // Extract the prompt from the request body or query parameters
+    console.log(req.body);
+    const { query } = req.body; // Assuming the prompt is sent in the request body
+
+    if (!query) {
+        return res.status(400).send('Please provide a prompt');
+    }
+
+    connection.query(query, (err, data) => send_res_array(res, err, data));
+}
+
 // Function to handle OpenAI API request
 const openaiCompletion = (req, res) => {
-    const prompt = "I'm going swingdancing. Generate me a playlist"; // Define your prompt here or extract it from the request
+    // Extract the prompt from the request body or query parameters
+    console.log(req.body);
+    const { prompt } = req.body; // Assuming the prompt is sent in the request body
+
+    if (!prompt) {
+        return res.status(400).send('Please provide a prompt');
+    }
 
     // Adjust the path to the worker folder and openai_worker.py
     const pythonProcess = spawn('python', [path.join(__dirname, '..', 'worker', 'openai_worker.py'), prompt]);
@@ -228,9 +246,10 @@ module.exports = {
     top_artists,
     longest_albums,
     songs_by_length,
+    openaiCompletion,
+    custom_query,
     songs_per_year,
     explicit_songs_per_year,
     clean_artists,
     search_songs,
-    openaiCompletion
 }
