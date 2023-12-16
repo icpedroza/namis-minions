@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis, LineChart, CartesianGrid, Line } from "recharts";
 import config from "../config.json";
 import LazyTable from "../components/LazyTable";
+import SimpleTable from "../components/SimpleTable";
 
 const CustomizedYAxisTick = (props) => {
     const { x, y, payload } = props;
@@ -147,27 +148,32 @@ export default function StatsPage() {
             </Grid>
 
             <Grid item xs={12}>
-                <Typography variant='h5' align='center'>Danceable Albums by Decade</Typography>
-                <LazyTable
-                    route={`http://${config.server_host}:${config.server_port}/danceability_by_decade?page_size=10`}
-                    columns={danceabilityColumns}
-                    defaultPageSize={10}
-                />
+                <Container>
+                    <Typography variant='h5' align='center'>Danceable Albums by Decade</Typography>
+                    <SimpleTable
+                        route={`http://${config.server_host}:${config.server_port}/danceability_by_decade`}
+                        columns={danceabilityColumns}
+                        title=''
+                        pageSize={10}
+                    />
+                </Container>
             </Grid>
 
             <Grid item xs={12}>
-                <Typography variant='h5' align='center'>Albums with Unexpected Changes</Typography>
-                <LazyTable
-                    route={`http://${config.server_host}:${config.server_port}/high_variation_albums?page_size=10`}
-                    columns={highVariationAlbumsColumns}
-                    defaultPageSize={10}
-                />
+                <Container>
+                    <Typography variant='h5' align='center'>Albums with Unexpected Changes</Typography>
+                    <LazyTable
+                        route={`http://${config.server_host}:${config.server_port}/high_variation_albums`}
+                        columns={highVariationAlbumsColumns}
+                        defaultPageSize={10}
+                    />
+                </Container>
             </Grid>
 
             <Grid item xs={12}>
                 <Typography variant='h5' align='center'>Album Summaries</Typography>
                 <LazyTable
-                    route={`http://${config.server_host}:${config.server_port}/album_summary_stats?page_size=10`}
+                    route={`http://${config.server_host}:${config.server_port}/album_summary_stats`}
                     columns={albumSummaryStatsColumns}
                     defaultPageSize={10}
                 />
