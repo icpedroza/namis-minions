@@ -1,7 +1,8 @@
 import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis, LineChart, CartesianGrid, Line, Label } from "recharts";
+import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis, LineChart, CartesianGrid, Line } from "recharts";
 import config from "../config.json";
+import LazyTable from "../components/LazyTable";
 
 const CustomizedYAxisTick = (props) => {
     const { x, y, payload } = props;
@@ -54,30 +55,44 @@ export default function StatsPage() {
             .then(resJson => setExplicitSongsData(resJson));
     }, []);
 
+    const danceabilityColumns = [
+        { headerName: 'Decade', field: 'decade' },
+        { headerName: 'Sample Albums', field: 'top_albums' },
+    ];
+
+    const highVariationAlbumsColumns = [
+        { headerName: 'Album Title', field: 'album_name' },
+        { headerName: 'Sample Songs', field: 'first_three_songs' },
+    ];
+
+    const cleanArtistsColumns = [
+        { headerName: 'Artist Name', field: 'artist_name' },
+    ];
+
     return (
 
         <Grid container spacing={10} align='center' style={{ paddingTop: '100px' }}>
-            <Grid item xs={6}>
-                <Typography variant='h5' align='center'>most songs</Typography>
-                <BarChart width={800} height={500} data={topArtistData} margin={{bottom: 40}}>
-                    <XAxis dataKey="artist_name" type="category" interval={0} tick={<CustomizedYAxisTick />}/>
-                    <YAxis/>
-                    <Bar dataKey="total_songs"/>
-                    <Tooltip/>
+            <Grid item xs={12}>
+                <Typography variant='h5' align='center'>Artists with Most Songs</Typography>
+                <BarChart width={800} height={500} data={topArtistData} margin={{ bottom: 40 }}>
+                    <XAxis dataKey="artist_name" type="category" interval={0} tick={<CustomizedYAxisTick />} />
+                    <YAxis />
+                    <Bar dataKey="total_songs" fill="#8884d8" />
+                    <Tooltip />
                 </BarChart>
             </Grid>
 
-            <Grid item xs={6}>
-                <Typography variant='h5' align='center'>most albums</Typography>
-                <BarChart width={800} height={500} data={mostAlbumsData} margin={{bottom: 40}}>
-                    <XAxis dataKey="artist_name" type="category" interval={0} tick={<CustomizedYAxisTick />}/>
-                    <YAxis/>
-                    <Bar dataKey="total_albums"/>
-                    <Tooltip/>
+            <Grid item xs={12}>
+                <Typography variant='h5' align='center'>Artists with Most Albums</Typography>
+                <BarChart width={800} height={500} data={mostAlbumsData} margin={{ bottom: 40 }}>
+                    <XAxis dataKey="artist_name" type="category" interval={0} tick={<CustomizedYAxisTick />} />
+                    <YAxis />
+                    <Bar dataKey="total_albums" fill="#8884d8" />
+                    <Tooltip />
                 </BarChart>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
                 <Typography variant='h5' align='center'>Yearly Trends Across Songs</Typography>
                 <LineChart width={730} height={250} data={musicTrendsData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -95,7 +110,7 @@ export default function StatsPage() {
                 </LineChart>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
                 <Typography variant='h5' align='center'>Number of Songs Per Year</Typography>
                 <LineChart width={730} height={250} data={annualSongsData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -119,6 +134,24 @@ export default function StatsPage() {
                     <Legend />
                     <Line dataKey="num_explicit_songs" stroke="#f47068" dot={false} />
                 </LineChart>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Typography variant='h5' align='center'>Danceable Albums by Decade</Typography>
+                <LazyTable
+                    route={`http://${config.server_host}:${config.server_port}/danceability_by_decade?page_size=10`}
+                    columns={danceabilityColumns}
+                    defaultPageSize={10}
+                />
+            </Grid>
+
+            <Grid item xs={12}>
+                <Typography variant='h5' align='center'>Albums with Unexpected Changes</Typography>
+                <LazyTable
+                    route={`http://${config.server_host}:${config.server_port}/high_variation_albums?page_size=10`}
+                    columns={highVariationAlbumsColumns}
+                    defaultPageSize={10}
+                />
             </Grid>
 
         </Grid>
