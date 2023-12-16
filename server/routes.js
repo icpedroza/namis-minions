@@ -202,7 +202,7 @@ const search_songs = async function (req, res) {
 
 const album_summary_stats = async function (req, res) {
     connection.query(`
-        SELECT * FROM album_avgs;
+        SELECT album_name, year, artist_name, total_songs, avg_duration, avg_tempo, avg_loudness, avg_energy, avg_acousticness, avg_instrumentalness FROM album_avgs LIMIT 10;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
@@ -216,7 +216,7 @@ const danceability_by_decade = async function (req, res) {
 
 const high_variation_albums = async function (req, res) {
     connection.query(`
-        SELECT album_name, first_three_songs FROM VariableAlbums
+        SELECT album_name, first_three_songs FROM VariableAlbums LIMIT 10
     `, (err, data) => send_res_array(res, err, data)
     );
 }

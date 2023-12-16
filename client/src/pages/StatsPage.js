@@ -65,9 +65,19 @@ export default function StatsPage() {
         { headerName: 'Sample Songs', field: 'first_three_songs' },
     ];
 
-    const cleanArtistsColumns = [
+    const albumSummaryStatsColumns = [
+        { headerName: 'Album Name', field: 'album_name' },
+        { headerName: 'Year', field: 'year' },
         { headerName: 'Artist Name', field: 'artist_name' },
+        { headerName: 'Total Songs', field: 'total_songs' },
+        { headerName: 'Average Duration', field: 'avg_duration' },
+        { headerName: 'Average Tempo', field: 'avg_tempo' },
+        { headerName: 'Average Loudness', field: 'avg_loudness' },
+        { headerName: 'Average Energy', field: 'avg_energy' },
+        { headerName: 'Average Acoustiness', field: 'avg_acousticness' },
+        { headerName: 'Average Instrumentalness', field: 'avg_instrumentalness' },
     ];
+
 
     return (
 
@@ -150,6 +160,15 @@ export default function StatsPage() {
                 <LazyTable
                     route={`http://${config.server_host}:${config.server_port}/high_variation_albums?page_size=10`}
                     columns={highVariationAlbumsColumns}
+                    defaultPageSize={10}
+                />
+            </Grid>
+
+            <Grid item xs={12}>
+                <Typography variant='h5' align='center'>Album Summaries</Typography>
+                <LazyTable
+                    route={`http://${config.server_host}:${config.server_port}/album_summary_stats?page_size=10`}
+                    columns={albumSummaryStatsColumns}
                     defaultPageSize={10}
                 />
             </Grid>
