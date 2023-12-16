@@ -7,7 +7,7 @@ import TestPage from "./pages/TestPage";
 import LLMPage from "./pages/LLMPage";
 import StatsPage from "./pages/StatsPage";
 import SearchPage from "./pages/SearchPage";
-import {lime, purple} from "@mui/material/colors";
+import { lime, purple } from "@mui/material/colors";
 
 const theme = createTheme({
     palette: {
@@ -25,13 +25,13 @@ export default function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <BrowserRouter>
-                <NavBar/>
+                <NavBar />
                 <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/test" element={<TestPage/>}/>
-                    <Route path="/beat_buddy" element={<LLMPage/>}/>
-                    <Route path="/stats" element={<StatsPage/>}/>
-                    <Route path="/search" element={<SearchPage />}/>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/test" element={<TestPage />} />
+                    <Route path="/beat_buddy" element={<LLMPage />} />
+                    <Route path="/stats" element={<StatsPage />} />
+                    <Route path="/search" element={<SearchPage />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

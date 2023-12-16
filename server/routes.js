@@ -3,8 +3,8 @@ const config = require('./config.json');
 const { spawn } = require('child_process');
 const path = require('path'); // Import the 'path' module
 
-const test = async function(req, res) {
-    res.json({content: 'this is from the server!'});
+const test = async function (req, res) {
+    res.json({ content: 'this is from the server!' });
 };
 
 const connection = mysql.createConnection({
@@ -16,7 +16,7 @@ const connection = mysql.createConnection({
 });
 connection.connect((err) => err && console.log(err));
 
-const send_res_obj = function(res, err, data) {
+const send_res_obj = function (res, err, data) {
     if (err || data.length === 0) {
         console.log(err);
         res.json({});
@@ -25,7 +25,7 @@ const send_res_obj = function(res, err, data) {
     }
 }
 
-const send_res_array = function(res, err, data) {
+const send_res_array = function (res, err, data) {
     if (err || data.length === 0) {
         console.log(err);
         res.json([]);
@@ -34,7 +34,7 @@ const send_res_array = function(res, err, data) {
     }
 }
 
-const artist_albums = async function(req, res) {
+const artist_albums = async function (req, res) {
     let q = `
         SELECT * FROM artist_albums_songs
     `;
@@ -52,7 +52,7 @@ const artist_albums = async function(req, res) {
     connection.query(q, (err, data) => send_res_array(res, err, data));
 }
 
-const similar_songs = async function(req, res) {
+const similar_songs = async function (req, res) {
     connection.query(`
         WITH base_song AS (
             SELECT
@@ -84,14 +84,14 @@ const similar_songs = async function(req, res) {
     );
 }
 
-const happy_mood_playlist = async function(req, res) {
+const happy_mood_playlist = async function (req, res) {
     connection.query(`
     SELECT * FROM high_energy_songs;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
-const hype_playlist = async function(req, res) {
+const hype_playlist = async function (req, res) {
     connection.query(`
     SELECT * FROM loud_songs
     ORDER BY loudness DESC
@@ -100,14 +100,14 @@ const hype_playlist = async function(req, res) {
     );
 }
 
-const music_trends = async function(req, res) {
+const music_trends = async function (req, res) {
     connection.query(`
     SELECT * FROM yearly_trends;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
-const top_artists = async function(req, res) {
+const top_artists = async function (req, res) {
     let q = `
     SELECT * FROM top_artists_by_song_no
     ORDER BY total_songs DESC
@@ -121,7 +121,7 @@ const top_artists = async function(req, res) {
     connection.query(q, (err, data) => send_res_array(res, err, data));
 }
 
-const longest_albums = async function(req, res) {
+const longest_albums = async function (req, res) {
     connection.query(`
     SELECT album_name, total_duration / (60 * 1000) AS total_duration_minutes
     FROM top_albums_duration
@@ -130,14 +130,14 @@ const longest_albums = async function(req, res) {
     );
 }
 
-const songs_by_length = async function(req, res) {
+const songs_by_length = async function (req, res) {
     connection.query(`
     SELECT * FROM songs_duration;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
-const songs_per_year = async function(req, res) {
+const songs_per_year = async function (req, res) {
     connection.query(`
     SELECT * FROM songs_per_year
     WHERE year <> 0;
@@ -145,21 +145,21 @@ const songs_per_year = async function(req, res) {
     );
 }
 
-const explicit_songs_per_year = async function(req, res) {
+const explicit_songs_per_year = async function (req, res) {
     connection.query(`
     SELECT * FROM explicit_songs_per_year;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
-const clean_artists = async function(req, res) {
+const clean_artists = async function (req, res) {
     connection.query(`
     SELECT * FROM artists_no_explicit_songs
     `, (err, data) => send_res_array(res, err, data)
     );
 }
 
-const search_songs = async function(req, res) {
+const search_songs = async function (req, res) {
     const title = req.query.title ?? '';
     const duration_low = req.query.duration_low ?? 60;
     const duration_high = req.query.duration_high ?? 660;
@@ -200,7 +200,37 @@ const search_songs = async function(req, res) {
     );
 }
 
-const custom_query = async function(req, res) {
+const album_summary_stats = async function (req, res) {
+    const offset = (req.query.page - 1) * req.query.page_size;
+
+    connection.query(`
+        SELECT album_name, year, artist_name, total_songs, avg_duration, avg_tempo, avg_loudness, avg_energy, avg_acousticness, avg_instrumentalness
+        FROM album_avgs 
+        LIMIT ${req.query.page_size}
+        OFFSET ${offset};
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const danceability_by_decade = async function (req, res) {
+    connection.query(`
+        SELECT * FROM decade_dance_albums;
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const high_variation_albums = async function (req, res) {
+    const offset = (req.query.page - 1) * req.query.page_size;
+
+    connection.query(`
+        SELECT album_name, first_three_songs FROM VariableAlbums 
+        LIMIT ${req.query.page_size}
+        OFFSET ${offset}
+    `, (err, data) => send_res_array(res, err, data)
+    );
+}
+
+const custom_query = async function (req, res) {
     // Extract the prompt from the request body or query parameters
     console.log(req.body);
     const { query } = req.body; // Assuming the prompt is sent in the request body
@@ -252,4 +282,7 @@ module.exports = {
     explicit_songs_per_year,
     clean_artists,
     search_songs,
+    album_summary_stats,
+    danceability_by_decade,
+    high_variation_albums,
 }
