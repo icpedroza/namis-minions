@@ -34,7 +34,7 @@ export default function SearchPage() {
 
     const [data, setData] = useState([]);
     const search = () => {
-        fetch(`http://${config.server_host}:${config.server_port}/search_songs?title=${title}` +
+        fetch(`https://${config.server_host}:${config.server_port}/search_songs?title=${title}` +
             `&duration_low=${duration[0]}&duration_high=${duration[1]}` +
             `&danceability_low=${danceability[0]}&danceability_high=${danceability[1]}` +
             `&energy_low=${energy[0]}&energy_high=${energy[1]}` +
