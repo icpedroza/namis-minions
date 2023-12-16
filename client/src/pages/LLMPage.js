@@ -28,7 +28,7 @@ export default function LLMPage() {
         setLoading(true);
         setError(false);
         try {
-            const promptResponse = await axios.post(`http://${config.server_host}:${config.server_port}/openai/completion`, {
+            const promptResponse = await axios.post(`https://${config.server_host}:${config.server_port}/openai/completion`, {
                 prompt: prompt // Send the prompt in the request body
             });
             console.log(promptResponse);
@@ -36,7 +36,7 @@ export default function LLMPage() {
             setQuery(generatedQuery);
             
             try {
-                const queryResponse = await axios.post(`http://${config.server_host}:${config.server_port}/custom_query`, {
+                const queryResponse = await axios.post(`https://${config.server_host}:${config.server_port}/custom_query`, {
                     query: generatedQuery
                 });
                 console.log(queryResponse);
