@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
 import LLMPage from "./pages/LLMPage";
 import StatsPage from "./pages/StatsPage";
+import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 
 const theme = createTheme({
     palette: {
@@ -14,7 +15,8 @@ const theme = createTheme({
 });
 
 export default function App() {
-    return (
+    const { user, isAuthenticated, isLoading } = useAuth0();
+    return isAuthenticated && (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <BrowserRouter>

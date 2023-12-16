@@ -1,14 +1,36 @@
+
+
 const express = require('express');
 const cors = require('cors');
 const config = require('./config.json');
 const routes = require('./routes');
+const { auth } = require('express-openid-connect');
 
 const app = express();
+
+// // OpenID Connect configuration
+// const authConfig = {
+//   authRequired: true,
+//   auth0Logout: true,
+//   secret: 'y3rBxtkaQTdumpQVcxfoqn7IK5Rb0oG4EfS0jxpd9ck95q7oTlnPH0AFNOiCA7Pj',
+//   baseURL: 'http://localhost:3000',
+//   clientID: 'cqHqQQw1o0kYfmRXJnOGUFQXyffe5PKJ',
+//   issuerBaseURL: 'https://dev-hytlp1znv5tv84fc.us.auth0.com'
+// };
+
 app.use(cors({
     origin: '*',
 }));
 
 app.use(express.json());
+
+// // auth router attaches /login, /logout, and /callback routes to the baseURL
+// app.use(auth(authConfig));
+
+// // req.isAuthenticated is provided from the auth router
+// app.get('/', (req, res) => {
+//     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+//   });
 
 app.get('/test', routes.test);
 app.get('/artist_albums', routes.artist_albums);
