@@ -149,7 +149,7 @@ export default function StatsPage() {
 
             <Grid item xs={12}>
                 <Container>
-                    <Typography variant='h5' align='center'>Danceable Albums by Decade</Typography>
+                    <Typography variant='h5' align='center'>Danceable Albums in Each Decade</Typography>
                     <SimpleTable
                         route={`http://${config.server_host}:${config.server_port}/danceability_by_decade`}
                         columns={danceabilityColumns}
@@ -161,7 +161,7 @@ export default function StatsPage() {
 
             <Grid item xs={12}>
                 <Container>
-                    <Typography variant='h5' align='center'>Albums with Unexpected Changes</Typography>
+                    <Typography variant='h5' align='center'>Albums with a Variety of Songs</Typography>
                     <LazyTable
                         route={`http://${config.server_host}:${config.server_port}/high_variation_albums`}
                         columns={highVariationAlbumsColumns}
@@ -171,12 +171,14 @@ export default function StatsPage() {
             </Grid>
 
             <Grid item xs={12}>
-                <Typography variant='h5' align='center'>Album Summaries</Typography>
-                <LazyTable
-                    route={`http://${config.server_host}:${config.server_port}/album_summary_stats`}
-                    columns={albumSummaryStatsColumns}
-                    defaultPageSize={10}
-                />
+                <Container>
+                    <Typography variant='h5' align='center'>Album Summaries</Typography>
+                    <LazyTable
+                        route={`http://${config.server_host}:${config.server_port}/album_summary_stats`}
+                        columns={albumSummaryStatsColumns}
+                        defaultPageSize={10}
+                    />
+                </Container>
             </Grid>
 
         </Grid>
