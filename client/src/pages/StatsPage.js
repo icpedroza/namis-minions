@@ -21,35 +21,35 @@ const CustomizedYAxisTick = (props) => {
 export default function StatsPage() {
     const [topArtistData, setTopArtistData] = useState([]);
     useEffect(() => {
-        fetch(`https://${config.server_host}:${config.server_port}/top_artists?page_size=10`)
+        fetch(`http://${config.server_host}:${config.server_port}/top_artists?page_size=10`)
             .then(res => res.json())
             .then(resJson => setTopArtistData(resJson));
     }, []);
 
     const [mostAlbumsData, setMostAlbumsData] = useState([]);
     useEffect(() => {
-        fetch(`https://${config.server_host}:${config.server_port}/artist_albums?page_size=10&sorted=true`)
+        fetch(`http://${config.server_host}:${config.server_port}/artist_albums?page_size=10&sorted=true`)
             .then(res => res.json())
             .then(resJson => setMostAlbumsData(resJson));
     }, []);
 
     const [musicTrendsData, setMusicTrendsData] = useState([]);
     useEffect(() => {
-        fetch(`https://${config.server_host}:${config.server_port}/music_trends?page_size=10&sorted=true`)
+        fetch(`http://${config.server_host}:${config.server_port}/music_trends?page_size=10&sorted=true`)
             .then(res => res.json())
             .then(resJson => setMusicTrendsData(resJson));
     }, []);
 
     const [annualSongsData, setAnnualSongsData] = useState([]);
     useEffect(() => {
-        fetch(`https://${config.server_host}:${config.server_port}/songs_per_year?page_size=10&sorted=true`)
+        fetch(`http://${config.server_host}:${config.server_port}/songs_per_year?page_size=10&sorted=true`)
             .then(res => res.json())
             .then(resJson => setAnnualSongsData(resJson));
     }, []);
 
     const [explicitSongsData, setExplicitSongsData] = useState([]);
     useEffect(() => {
-        fetch(`https://${config.server_host}:${config.server_port}/explicit_songs_per_year?page_size=10&sorted=true`)
+        fetch(`http://${config.server_host}:${config.server_port}/explicit_songs_per_year?page_size=10&sorted=true`)
             .then(res => res.json())
             .then(resJson => setExplicitSongsData(resJson));
     }, []);
