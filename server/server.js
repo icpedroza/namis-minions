@@ -27,7 +27,7 @@ app.get('/search_songs', routes.search_songs);
 app.post('/openai/completion', routes.openaiCompletion);
 app.post('/custom_query', routes.custom_query);
 
-app.listen(config.server_port, () => {
+app.listen(config.server_port, "0.0.0.0", () => {
     console.log(`Server running at http://${config.server_host}:${config.server_port}/`)
     console.log(`ASDFASDFSADASDFG`)
 });
