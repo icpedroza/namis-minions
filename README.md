@@ -6,6 +6,22 @@ Team members: Nami, Jonah, Ian, Kyle
 
 This repository contains code for our CIS 5500 Final Project. We are planning to build a web application that delivers song recommendations and generates playlists for moods using LLMs. This will be based on a backend that stores hundreds of thousands of songs, as well as their features like valence, danceability, etc. We plan to deliver song recommendations using content-based or collaborative filtering. We also are looking to use LLMs to provide more context-aware recommendations. For example, if a user says they want "slow Jazz music," then we might want to use LLMs to extract keywords and create structured queries.
 
+## Build and Run Instructions
+This repository contains two components, the client and the server, which must be run simultaneously for the application to function properly.
+In ***both*** the ```./server``` and ```./client``` folders one must first run
+
+```bash
+$npm install
+```
+
+to install the required npm dependencies, and then
+
+```bash
+$npm start
+```
+
+to run the client and server.
+
 ## File Structure
 
 ```bash
