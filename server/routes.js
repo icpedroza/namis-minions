@@ -254,7 +254,12 @@ const openaiCompletion = (req, res) => {
     }
 
     // Adjust the path to the worker folder and openai_worker.py
+<<<<<<< Updated upstream
     const pythonProcess = spawn('python', [path.join(__dirname, '..', 'server', 'openai_worker.py'), prompt]);
+=======
+    // const pythonProcess = spawn('python', ['./openai_worker.py', prompt]);
+    const pythonProcess = spawn('python', ['./openai_worker.py', prompt]);
+>>>>>>> Stashed changes
 
     pythonProcess.stdout.on('data', (data) => {
         const result = data.toString();
