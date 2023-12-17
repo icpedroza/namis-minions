@@ -95,6 +95,7 @@ const happy_mood_playlist = async function (req, res) {
 const hype_playlist = async function (req, res) {
     connection.query(`
     SELECT * FROM loud_songs
+    ORDER BY RAND()
     LIMIT 30;
     `, (err, data) => send_res_array(res, err, data)
     );
@@ -254,7 +255,7 @@ const openaiCompletion = (req, res) => {
 
     // Adjust the path to the worker folder and openai_worker.py
     // const pythonProcess = spawn('python', ['./openai_worker.py', prompt]);
-    const pythonProcess = spawn('python', [path.join(__dirname, '..', ‘server’, 'openai_worker.py'), prompt]);
+    const pythonProcess = spawn('python', [path.join(__dirname, '..', 'server', 'openai_worker.py'), prompt]);
 
     pythonProcess.stdout.on('data', (data) => {
         const result = data.toString();
