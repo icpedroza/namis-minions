@@ -1,3 +1,5 @@
+// StatsPage.js defines the statistics page which contains various data visualizations.
+
 import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis, LineChart, CartesianGrid, Line } from "recharts";
@@ -5,6 +7,8 @@ import config from "../config.json";
 import LazyTable from "../components/LazyTable";
 import SimpleTable from "../components/SimpleTable";
 
+// CustomizedYAxisTick transforms label text by splitting on newlines and rotating so that the labels in bar charts
+// do not overlap with each other.
 const CustomizedYAxisTick = (props) => {
     const { x, y, payload } = props;
     const words = payload.value.split(' ');
@@ -21,6 +25,7 @@ const CustomizedYAxisTick = (props) => {
 };
 
 export default function StatsPage() {
+    // each table needs to store its data statefully, and the dom must be reloaded when data is recieved
     const [topArtistData, setTopArtistData] = useState([]);
     useEffect(() => {
         fetch(`http://${config.server_host}:${config.server_port}/top_artists?page_size=10`)

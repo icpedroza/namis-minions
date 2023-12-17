@@ -1,3 +1,5 @@
+// IMPORTANT: HomePage.js is not used in the final website (only for testing purposes)
+
 import {Container, Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useState} from "react";
 import LazyTable from "../components/LazyTable";

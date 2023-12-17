@@ -1,3 +1,5 @@
+// App.js defines the primary layout of and links together the website.
+
 import NavBar from './components/NavBar';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";

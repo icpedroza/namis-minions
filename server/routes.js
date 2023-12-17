@@ -1,3 +1,7 @@
+// routes.js connects to the database and makes queries upon request.
+// Each query is documented in the project report.
+// This file also handles requests that get sent to the openai api, assisted by a python script.
+
 const mysql = require('mysql');
 const config = require('./config.json');
 const { spawn } = require('child_process');

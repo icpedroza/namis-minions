@@ -1,3 +1,5 @@
+// NavBar.js defines a component, similar to that in HW2, to create a navbar that is persistent across all pages.
+
 import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 

@@ -1,3 +1,5 @@
+// IMPORTANT: TestPage.js is not used in the final website, it is only for testing purposes
+
 import {Container} from "@mui/material";
 import {useEffect, useState} from "react";
 import config from "../config.json";

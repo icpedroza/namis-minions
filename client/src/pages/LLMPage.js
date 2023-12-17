@@ -1,4 +1,6 @@
-import {Container, Divider, CircularProgress, FormControl, InputLabel, 
+// LLMPage.js defines the main page of the website, where the user interacts with "Beat Buddy"
+
+import {Container, Divider, CircularProgress, FormControl, InputLabel,
     MenuItem, Select, SelectChangeEvent, createTheme, ThemeProvider, 
     TextField, Button, Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Typography} from "@mui/material";
 import {useState} from "react";

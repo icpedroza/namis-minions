@@ -1,3 +1,5 @@
+// LazyTable.js defines a component, similar to that in HW2, to create lazy, paginated tables for query responses.
+
 import { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 

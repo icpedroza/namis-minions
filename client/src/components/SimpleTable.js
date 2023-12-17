@@ -1,3 +1,5 @@
+// SimpleTable.js defines a static, non-paginated table component for displaying query results.
+
 import { useEffect, useState } from 'react';
 import {
     Table,

@@ -1,3 +1,6 @@
+// SearchPage.js defines the "search page" for the website, which allows for a user to search for songs using a variety
+// of attributes contained in our dataset.
+
 import {
     Button,
     Checkbox,
@@ -13,6 +16,7 @@ import {
 import {useState} from "react";
 import config from "../config.json";
 
+// formatDuration is borrowed from HW2 and converts raw seconds the minute-second format
 export function formatDuration(sec) {
     const date = new Date(0);
     date.setSeconds(sec ?? 0);
@@ -20,6 +24,7 @@ export function formatDuration(sec) {
 }
 
 export default function SearchPage() {
+    // each of these stateful values can be customized by the user and then are sent to the server for the search query
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState([60, 660]);
     const [danceability, setDanceability] = useState([0, 1]);

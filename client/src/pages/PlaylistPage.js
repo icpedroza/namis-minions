@@ -1,3 +1,6 @@
+// PlaylistPage.js defines the "curated playlist" page, which displays the result of multiple queries upon selecting
+// a specific "playlist" which corresponds to a query result.
+
 import {Container, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {useState} from "react";
 import LazyTable from "../components/LazyTable";
@@ -7,11 +10,8 @@ import SimpleTable from "../components/SimpleTable";
 export default function PlaylistPage() {
     const [playlist, setPlaylist] = useState([]);
 
-    console.log("loading playlist page");
-
     const handleChange = event => {
         setPlaylist(event.target.value);
-        console.log("hi %s", playlist);
     };
 
     const playlist_cols = [
@@ -32,7 +32,7 @@ export default function PlaylistPage() {
     return (
         <Container>
             <h4>Select one of our curated playlists below</h4>
-            <FormControl variant="standard" sx={{m: 1, minWidth: 120}}>
+            <FormControl variant="standard" sx={{m: 1, minWidth: 120}}> {/* the playlist selection box */}
                 <InputLabel id="playlist-select-label">Playlist</InputLabel>
                 <Select
                     labelId="playlist-select-label"
