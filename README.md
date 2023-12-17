@@ -11,31 +11,42 @@ This repository contains code for our CIS 5500 Final Project. We are planning to
 ```bash
 ├── README.md
 ├── client
-│   ├── App.js
-│   ├── index.js
 │   ├── package-lock.json
 │   ├── package.json
-│   └── public
-│       └── index.html
-├── data
-│   ├── clean_data.csv
-│   ├── genres_v2.csv
-│   └── tracks_features.csv
+│   ├── public
+│   │   └── index.html
+│   └── src
+│       ├── components
+│       │   ├── LazyTable.js
+│       │   ├── NavBar.js
+│       │   └── SimpleTable.js
+│       ├── pages
+│       │   ├── HomePage.js
+│       │   ├── LLMPage.js
+│       │   ├── SearchPage.js
+│       │   ├── StatsPage.js
+│       │   └── TestPage.js
+│       ├── config.json
+│       ├── App.js
+│       └── index.js
 ├── preprocessing.ipynb
 └── server
+    ├── cert.pem
+    ├── csr.pem
+    ├── key.pem
+    ├── openai_worker.py
     ├── config.json
     ├── package-lock.json
     ├── package.json
     ├── routes.js
     └── server.js
+
 ```
 
-`client`: Files for the client side of the web application. Uses react.js.
+`client`: Files for the client side of the web application. Uses react.js. Includes both React Pages and Components folders
 <br>
-`server`: Files for the server side of the web application. Makes queries to MySQL database, and uses express to serve requests from the client.
+`server`: Files for the server side of the web application. Makes queries to MySQL database, and uses express to serve requests from the client. Includes an openai_worker python script to get custom queries.
 <br> 
-`data`: This directory is not displayed on github, but includes initial CSV files and the final cleaned dataset that makes up the main table in our database instance
-<br>
 `preprocessing.ipynb`: Contains notebook used for cleaning, preprocessing, and joining of two initial datasets into one. Includes steps like initial exploratory analysis, removing nulls, data imputation, etc.
 
 
