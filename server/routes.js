@@ -254,7 +254,8 @@ const openaiCompletion = (req, res) => {
 
     // Adjust the path to the worker folder and openai_worker.py
     // const pythonProcess = spawn('python', ['./openai_worker.py', prompt]);
-    const pythonProcess = spawn('python', [path.join(__dirname, '..', ‘server’, 'openai_worker.py'), prompt]);
+    // const pythonProcess = spawn('python', [path.join(__dirname, 'openai_worker.py'), prompt]);
+    const pythonProcess = spawn('python', [path.join(__dirname, '..', 'server', 'openai_worker.py'), prompt]);
 
     pythonProcess.stdout.on('data', (data) => {
         const result = data.toString();
