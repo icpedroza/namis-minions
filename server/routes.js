@@ -86,7 +86,8 @@ const similar_songs = async function (req, res) {
 
 const happy_mood_playlist = async function (req, res) {
     connection.query(`
-    SELECT * FROM high_energy_songs;
+    SELECT * FROM high_energy_songs
+    LIMIT 30;
     `, (err, data) => send_res_array(res, err, data)
     );
 }
@@ -94,7 +95,6 @@ const happy_mood_playlist = async function (req, res) {
 const hype_playlist = async function (req, res) {
     connection.query(`
     SELECT * FROM loud_songs
-    ORDER BY loudness DESC
     LIMIT 30;
     `, (err, data) => send_res_array(res, err, data)
     );

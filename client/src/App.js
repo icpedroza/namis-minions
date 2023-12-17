@@ -7,6 +7,7 @@ import TestPage from "./pages/TestPage";
 import LLMPage from "./pages/LLMPage";
 import StatsPage from "./pages/StatsPage";
 import SearchPage from "./pages/SearchPage";
+import PlaylistPage from "./pages/PlaylistPage";
 import { lime, purple } from "@mui/material/colors";
 
 const theme = createTheme({
@@ -30,6 +31,7 @@ export default function App() {
                     <Route path="/" element={<LLMPage />} />
                     <Route path="/stats" element={<StatsPage />} />
                     <Route path="/search" element={<SearchPage />} />
+                    <Route path="/playlists" element={<PlaylistPage/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
