@@ -1,6 +1,6 @@
-# Spotify App [Title Undecided]
+# Beat Buddy
 
-Team name: Nami's Minions
+CIS 550 Group 1
 
 Team members: Nami, Jonah, Ian, Kyle
 
