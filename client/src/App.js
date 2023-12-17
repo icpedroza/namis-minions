@@ -28,7 +28,7 @@ export default function App() {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
-                    <Route path="/" element={<LLMPage />} />
+                    <Route path="/" element={<LLMPage/>} />
                     <Route path="/stats" element={<StatsPage />} />
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/playlists" element={<PlaylistPage/>}/>

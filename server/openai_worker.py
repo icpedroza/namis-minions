@@ -5,7 +5,7 @@ import sys
 # Hardcoded OpenAI API key
 api_key = "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"
 
-
+# Code to access OpenAI Chat Completions API with correct context and given prompt
 def get_openai_chat_completion(prompt):
     completion_url = (
         "https://api.openai.com/v1/chat/completions"  # Chat Completions endpoint
