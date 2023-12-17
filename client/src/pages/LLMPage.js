@@ -76,70 +76,76 @@ export default function LLMPage() {
         <ThemeProvider theme={theme}>
             <Container>
                 <h1>Welcome to the Beat Buddy! Ask anything you like</h1>
+                <p>
+                    Beat Buddy is a cutting edge web based application that uses machine learning technology to deliver
+                    personalized song recommendations. Describe the type of songs you want to listen to, and Beat Buddy
+                    will build a playlist based on your input. For example: "Make me a playlist with happy songs"
+                </p>
                 <Divider/>
-                    <TextField
-                        type="text"
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="Enter your prompt..."
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleGeneratePlaylist} // Clicking button triggers request
-                        disabled={loading} // Gray out when loading
+                <TextField
+                    type="text"
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder="Enter your prompt..."
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleGeneratePlaylist} // Clicking button triggers request
+                    disabled={loading} // Gray out when loading
+                >
+                    Generate Playlist
+                </Button>
+                <Divider/>
+                {loading && (
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        height={200} // Adjust height as needed
                     >
-                        Generate Playlist
-                    </Button>
-                <Divider/>
-                    {loading && (
-                        <Box
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            height={200} // Adjust height as needed
-                        >
-                            <CircularProgress />
-                        </Box>
-                    )}
-                    {error && ( // Only display when an error occurs
-                        <Box
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            height={200} // Adjust height as needed
-                        >
-                            <Typography variant="h4" color="primary">Beat Buddy had an oopsy-daisy. Try again with a new prompt!</Typography>
-                        </Box>
-                    )}
-                    {generatedPlaylist.length > 0 && ( // Display results once generated
-                        <Box marginTop={2}>
-                            <h3>Generated Playlist:</h3>
-                            <TableContainer>
+                        <CircularProgress/>
+                    </Box>
+                )}
+                {error && ( // Only display when an error occurs
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        height={200} // Adjust height as needed
+                    >
+                        <Typography variant="h4" color="primary">Beat Buddy had an oopsy-daisy. Try again with a new
+                            prompt!</Typography>
+                    </Box>
+                )}
+                {generatedPlaylist.length > 0 && ( // Display results once generated
+                    <Box marginTop={2}>
+                        <h3>Generated Playlist:</h3>
+                        <TableContainer>
                             <Table>
                                 <TableHead>
-                                <TableRow>
-                                    {generatedPlaylistColumns.map((column) => (
-                                    <TableCell key={column.field}>{column.headerName}</TableCell>
-                                    ))}
-                                </TableRow>
+                                    <TableRow>
+                                        {generatedPlaylistColumns.map((column) => (
+                                            <TableCell key={column.field}>{column.headerName}</TableCell>
+                                        ))}
+                                    </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                {generatedPlaylist.map((row, index) => (
-                                    <TableRow key={index}>
-                                    {generatedPlaylistColumns.map((column) => (
-                                        <TableCell key={column.field}>{row[column.field]}</TableCell>
+                                    {generatedPlaylist.map((row, index) => (
+                                        <TableRow key={index}>
+                                            {generatedPlaylistColumns.map((column) => (
+                                                <TableCell key={column.field}>{row[column.field]}</TableCell>
+                                            ))}
+                                        </TableRow>
                                     ))}
-                                    </TableRow>
-                                ))}
                                 </TableBody>
                             </Table>
-                            </TableContainer>
-                        </Box>
-                    )}
+                        </TableContainer>
+                    </Box>
+                )}
             </Container>
         </ThemeProvider>
     )
