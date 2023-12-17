@@ -75,7 +75,7 @@ export default function LLMPage() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <h1>Welcome to the Beat Buddy! Ask anything you like</h1>
+                <h1>Welcome to the Beat Buddy!</h1>
                 <p>
                     Beat Buddy is a cutting edge web based application that uses machine learning technology to deliver
                     personalized song recommendations. Describe the type of songs you want to listen to, and Beat Buddy

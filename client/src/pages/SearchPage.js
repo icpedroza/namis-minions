@@ -99,7 +99,7 @@ export default function SearchPage() {
                     />
                 </Grid>
                 <Grid item xs={4}>
-                    <p>Daceability</p>
+                    <p>Danceability</p>
                     <Slider
                         value={danceability}
                         min={0}
